@@ -19,11 +19,11 @@ const pages = [
     }, 
     {
         'page': 'Login',
-        'link': '/sobre'
+        'link': '/'
     }, 
     {
         'page': 'Cadastro',
-        'link': '/sobre'
+        'link': '/cadastro'
     }
 ];
 const settings = ['Perfil', 'Posts', 'Sair'];
@@ -90,21 +90,22 @@ export const Header = () => {
               }}
             >
               {pages.map((page) => (
+              <Link 
+              to={page.link}  
+              style={
+                  {textDecoration: 'none', 
+                  color: '#000'}
+              }>
                 <MenuItem  
                 key={page.page}
                 onClick={handleCloseNavMenu}
                 >
                     <Typography textAlign="center">
-                        <Link 
-                        to={page.link}  
-                        style={
-                            {textDecoration: 'none', 
-                            color: '#000'}
-                        }>
                             {page.page}
-                        </Link>
+                        
                     </Typography>
                 </MenuItem>
+              </Link>
               ))}
             </Menu>
           </Box>
@@ -118,20 +119,22 @@ export const Header = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Button
-                key={page.page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+              <Link 
+              to={page.link}
+              style={{textDecoration: 'none', color: '#fff'}}
+              key={page.page}
               >
-                <Typography  textAlign="center">
-                    <Link 
-                    to={page.link}
-                    style={{textDecoration: 'none', color: '#fff'}}
-                    >
-                        {page.page}
-                    </Link>
-                </Typography>
-              </Button>
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  <Typography  textAlign="center">
+
+                          {page.page}
+                    
+                  </Typography>
+                </Button>
+                </Link>
             ))}
           </Box>
 

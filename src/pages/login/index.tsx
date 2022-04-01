@@ -1,10 +1,9 @@
 import { Grid } from '@mui/material'
 import { FormLogin } from './components/FormLogin';
-import { Header } from '../../components/header'
 
-const Login = () => {
+export const Login = () => {
     return(
-        <><Header/>
+    
         <Grid
         container
         spacing={0}
@@ -18,8 +17,6 @@ const Login = () => {
                 <FormLogin/>
             </Grid> 
         </Grid> 
-        </>
+    
     )
 }
-
-export default Login;

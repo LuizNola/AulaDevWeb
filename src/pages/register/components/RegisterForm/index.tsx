@@ -1,26 +1,52 @@
 import { TextField, Button, FormHelperText,Typography } from '@mui/material'
 
-export const FormLogin = () => {
+export const RegisterForm = () => {
     return (
-        <form style={{
-        padding: '2rem', 
-        borderRadius: '1rem',
-        backgroundColor: '#fff'
-        }}
-        noValidate
-        >
-  
+        <form 
+        style={{ 
+          padding: '2rem', 
+          borderRadius: '1rem',
+          width: '50%',
+          backgroundColor: '#fff'
+        }} 
+        noValidate>  
+
         <TextField
           error={false}
           fullWidth
           margin="normal"
           autoFocus
           helperText=""
-          label="Usuário"
+          label="Nome"
+          name="name"
+          type="text"
+          variant="outlined"
+        />
+        
+        <TextField
+          error={false}
+          margin="normal"
+          fullWidth
+          autoFocus
+          helperText=""
+          label="Curso"
+          name="course"
+          type="text"
+          variant="outlined"
+        />
+        <TextField
+          error={false}
+          fullWidth
+          margin="normal"
+          autoFocus
+          helperText=""
+          label="Usuário (Para login)"
           name="email"
           type="email"
           variant="outlined"
         />
+
+
         <TextField
           error={false}
           fullWidth
@@ -42,13 +68,13 @@ export const FormLogin = () => {
           size="large"
           variant="contained"
         >
-          Login
+          Cadastre-se
         </Button>
         <Typography 
         sx={{ mb: 1, width: '100%', textAlign: 'center' }}
         color="text.secondary"
         >
-          Ou <a href="/cadastro">Cadastre-se</a>
+          Ja tem uma conta? <a href="/">Clique aqui</a>
         </Typography>
       </form>
     )
