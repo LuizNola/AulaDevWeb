@@ -2,7 +2,7 @@ import axios from "axios";
 
 import {authHandler} from '../services/authHandler'
 
-const baseURL = "http://localhost:3000/api";
+const baseURL = "https://aula-dev-eywuxfj2b-luiznola.vercel.app/api";
 
 export const apiClient = axios.create({
   baseURL
