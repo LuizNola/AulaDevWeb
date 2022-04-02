@@ -1,8 +1,5 @@
-import { Box, Grid } from "@mui/material"
+import { Grid } from "@mui/material"
 import { CreatePostArea } from "./components/CreatePostArea"
-import { Post } from "./components/Post"
-import { apiClient } from "../../services/api"
-import { useEffect, useState } from "react"
 import { PostProvider } from "./context"
 import { PostList } from "./components/PostList"
 

@@ -1,19 +1,22 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
+import { Post } from '../../../../commom/types/posts_types'
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 
-export const Post = () => {
+
+
+export const PostCard = (postUser: Post) => {
   return (
-    <Card sx={{ maxWidth: '30%' , mt: '1rem '}}>
+    <Card sx={{width: '100%', maxWidth: '400px', mt: '1rem '}}>
       <CardActionArea>
         <CardContent>
           <Typography gutterBottom  component="div">
-            Felipe Nune - Sistemas de informação
+            {postUser?.author} - {postUser?.curso}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Adoro bubblesort, Aprendi graças ao leleo, uso todo dia no meu trabalho, meu sonho e levar o leleo para meu galpão e fazer alguns jogos para nos divertimos juntos :D
+            {postUser?.msg}
           </Typography>
         </CardContent>
       </CardActionArea>

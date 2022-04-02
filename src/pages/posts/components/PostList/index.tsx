@@ -1,6 +1,5 @@
-import { Box } from "@mui/material"
 import { usePost } from "../../context"
-import { Post } from "../Post"
+import { PostCard } from "../Post"
 
 export const PostList = () => {
 
@@ -13,7 +12,14 @@ export const PostList = () => {
         <>
             {isLoading && <h1>Carregando</h1>}
             {posts?.map((post) => {
-                return <Post/>
+                return( 
+                    <PostCard 
+                        curso={post.curso}
+                        msg={post.msg}
+                        author={post.author}
+                        id={post.id}
+                    />
+                )
             })}
             
         </>

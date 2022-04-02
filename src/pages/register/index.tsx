@@ -1,7 +1,19 @@
 import { Grid } from "@mui/material"
+import { useEffect } from "react";
+import { useNavigate } from "react-router";
+import { isLogged } from "../../services/authHandler";
 import { RegisterForm } from "./components/RegisterForm"
 
 export const Register = () => {
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if(isLogged()){
+            return navigate("/posts")
+        }
+    })
+
     return (
         <Grid
         container

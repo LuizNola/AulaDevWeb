@@ -1,7 +1,7 @@
 import { createContext, FC, useContext } from "react";
 import { Post, CreatePostPayload } from "../../commom/types/posts_types"
 import { useMutation, useQuery, useQueryClient } from "react-query"
-import {postRequests} from "./posts.requests";
+import {postRequests} from "../../commom/api/posts.requests";
 
 type postsState = {
     posts: Post[]

@@ -10,9 +10,12 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { doLogout } from '../../services/authHandler';
+import { useAuth } from '../../context/authContext';
+import icon from '../../assets/icon.jpg'
 
-const pages = [
+const publicPages = [
     {
         'page': 'Sobre',
         'link': '/sobre'
@@ -26,9 +29,24 @@ const pages = [
         'link': '/cadastro'
     }
 ];
-const settings = ['Perfil', 'Posts', 'Sair'];
+
+const privatePages = [
+  {
+      'page': 'Sobre',
+      'link': '/sobre'
+  }, 
+  {
+      'page': 'Posts',
+      'link': '/posts'
+  }
+];
 
 export const Header = () => {
+
+  const {isLogged} = useAuth();
+
+  const navigate = useNavigate()
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -47,6 +65,13 @@ export const Header = () => {
     setAnchorElUser(null);
   };
 
+  
+  const logout = () => {
+    doLogout()
+    handleCloseUserMenu()
+    navigate('/')
+  }
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -57,9 +82,9 @@ export const Header = () => {
             component="div"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
-            LOGO
+            <img src={icon} alt="Facetec" style={{ width: '2rem', borderRadius: '3rem'}}/>
           </Typography>
-
+          
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -89,20 +114,19 @@ export const Header = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
+              {(isLogged() ? privatePages : publicPages).map((page) => (
               <Link 
               to={page.link}  
-              style={
+              key={page.page}
+              style={ 
                   {textDecoration: 'none', 
                   color: '#000'}
               }>
                 <MenuItem  
-                key={page.page}
                 onClick={handleCloseNavMenu}
                 >
                     <Typography textAlign="center">
                             {page.page}
-                        
                     </Typography>
                 </MenuItem>
               </Link>
@@ -118,7 +142,7 @@ export const Header = () => {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            {(isLogged() ? privatePages : publicPages).map((page) => (
               <Link 
               to={page.link}
               style={{textDecoration: 'none', color: '#fff'}}
@@ -129,44 +153,41 @@ export const Header = () => {
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
                   <Typography  textAlign="center">
-
-                          {page.page}
-                    
+                    {page.page} 
                   </Typography>
                 </Button>
                 </Link>
             ))}
           </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
+          {isLogged() && (
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="P" src="" />
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: '45px' }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                  <MenuItem onClick={logout}>
+                    <Typography textAlign="center">Sair</Typography>
+                  </MenuItem>
+              </Menu>
+            </Box>
+          )}
         </Toolbar>
       </Container>
     </AppBar>

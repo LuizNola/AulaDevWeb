@@ -1,8 +1,8 @@
 export type Post = {
     id: number,
-    title: string,
+    author: string,
     curso: string,
     msg: string
 }
 
-export type CreatePostPayload = Pick<Post, 'curso' | 'msg' | 'title'>;
+export type CreatePostPayload = Pick<Post, 'curso' | 'msg' | 'author'>;
