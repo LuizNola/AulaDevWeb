@@ -9,7 +9,7 @@ const {
     createPost
 } = usePost()
 
-const  [msg, setMsg] = useState<string>("sexo");
+const  [msg, setMsg] = useState<string>("");
 
 const cleanForm = () => {
     setMsg("")
